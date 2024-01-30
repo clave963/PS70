@@ -42,7 +42,7 @@ nav {
 
 .nav-link {
   border: 3px outset #0E078D;
-  border-radius: 40px;
+  border-radius: 10px;
   padding: 10px 30px;
   background-color: #0E078D;
   color: #EEE7E8;
@@ -51,7 +51,7 @@ nav {
 
 .nav-link:hover {
   border: 3px inset #E3165B;
-  border-radius: 40px;
+  border-radius: 10px;
   padding: 10px 30px;
   background-color: #0E078D;
   transition: 0.3s;
@@ -59,7 +59,7 @@ nav {
 
 #btn {
   border: 3px outset #0E078D;
-  border-radius: 40px;
+  border-radius: 10px;
   padding: 10px 30px;
   background-color: #0E078D;
   color: #EEE7E8;
@@ -67,7 +67,7 @@ nav {
 }
 
 #btn:hover {
-  border: 3px inset #E3165B;
+  border: 3px inset #f6f4f5;
   border-radius: 40px;
   padding: 10px 30px;
   background-color: #0E078D;
