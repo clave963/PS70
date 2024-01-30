@@ -14,7 +14,7 @@ p {font-size: 16px;}
 .margin {margin-bottom: 30px;}
 
 a {
-  color: #E3165B;
+  color: #e5f142;
 }
 
 .container-fluid {
@@ -50,7 +50,7 @@ nav {
 }
 
 .nav-link:hover {
-  border: 3px inset #E3165B;
+  border: 3px inset #e5f142;
   border-radius: 10px;
   padding: 10px 30px;
   background-color: #0E078D;
