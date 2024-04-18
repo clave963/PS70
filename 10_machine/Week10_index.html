@@ -80,15 +80,17 @@
   <ul>
 <li><p> ESP32</p></li>
 <li><p>2 x Stepper Drivers</p></li>  
-<li>2 x breadboards</li>
-<li>USBC transformer converts 5V to 12V</li> 
-<li>2 x Nema 17 Stepper motors (17 is the physical size)</li>
+<li><p> 2 x breadboards </p></li>
+<li><p>USBC transformer converts 5V to 12V</p></li> 
+<li><p>2 x Nema 17 Stepper motors (17 is the physical size)</p></li>
   </ul>
 </div>
 <p>
   In wiring the two stepper motors for the drawing machine, we used an ESP32 to connect the motors to Arduino in order to control their movement. We wired the motors to two breadboards (one extender board) and then used the Stepper drivers to transform movement instructions from Arduino and intake voltage to power the motors. We need to be able to simultaneously control both stepper motors. In order to figure this out, we looked at Cindy's old board and referenced the pins to assemble our board. We also had to construct our own extra long wires because our board scale is so large. 
 <br>
+<br>
   We ran into some issues getting one of our Stepper Motors to run. After running a current to the motor, we learned that one of our motors had an internal issue, which Bobby suggested could be due to some magnetization issues. 
+<br>
 <br>
   We initially struggled to get power to work because we only had AC cords, which is why we used the adapter to convert the 5V power supply into the 12V we needed to power two motors from an external power supply.  </p> 
 <p class="margin">   </p>
