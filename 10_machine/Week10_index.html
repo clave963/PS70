@@ -77,15 +77,15 @@
 <p class="margin">   </p>
 <p> <b> The following components were used in wiring the drawing machine: </b> </p>
 <div>
-<p>
   <ul>
+    <p>
 <li> ESP32</li>
 <li>2 x Stepper Drivers</li>  
 <li>2 x Nema 17 Stepper motors (17 is the physical size)</li>
 <li>2 x breadboards</li>
 <li>USBC transformer converts 5V to 12V</li> 
+      </p>
   </ul>
-</p>
 </div>
 <p>
   In wiring the two stepper motors for the drawing machine, we used an ESP32 to connect the motors to Arduino in order to control their movement. We wired the motors to two breadboards (one extender board) and then used the Stepper drivers to transform movement instructions from Arduino and intake voltage to power the motors. We need to be able to simultaneously control both stepper motors. In order to figure this out, we looked at Cindy's old board and referenced the pins to assemble our board. We also had to construct our own extra long wires because our board scale is so large. 
