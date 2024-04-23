@@ -92,10 +92,150 @@
 <p> 
   We developed some initial code to get the motors to individually move. Unfortunately, we weren't able to get the drawing machine responsive to this code after running into a number of bugs. Our next steps are to write and compile the Arduino code necessary for controlling the motors speed and direction, and second to develop the processing code necessary for Gcode use with the Pen plotter.  </p> 
 
-  <div class="codebox">
-    <code>   
-        var message = "hello world!";
-        alert(message);
+<h5>Arduino Plotter Code</h5>
+<pre>
+  <code>
+    // MultiStepper.pde
+    // -*- mode: C++ -*-
+    //
+    // Shows how to multiple simultaneous steppers
+    // Runs one stepper forwards and backwards, accelerating and decelerating
+    // at the limits. Runs other steppers at the same time
+    //
+    // Copyright (C) 2009 Mike McCauley
+    // $Id: MultiStepper.pde,v 1.1 2011/01/05 01:51:01 mikem Exp mikem $
+     
+    #include <AccelStepper.h>
+     
+    // Define some steppers and the pins the will use
+    AccelStepper stepper1 = AccelStepper(1, 14, 12);
+    AccelStepper stepper2 = AccelStepper(1, 25, 26);
+    
+    int s1_bounds[] = {-2000, 2000};
+    int s2_bounds[] = {-500, 500};
+    int T = 1;
+    int speed = 700;
+    
+    long cur_pos[] = {0, 0};
+    long goal_pos[] = {1000,500};
+    
+    float next_vel[] = {0., 0.};
+    
+    float ratio = 5. / 7.5;
+    
+    
+    // int points_x[] = {0, 1000, 1000, 0, 0};
+    // int points_y[] = {0, 0, 500, 500, 0};
+    
+    // int points_x[] = {0, int(500 * ratio), int(1000 * ratio), int(500 * ratio)};
+    // int points_y[] = {0, 500, 0, -500};
+    
+    // int points_x[] = {0, -1000, -1000, 0, 0, -1000, -1000, 0, 0, -1000, -1000, 0, 0, -1000, -1000, 0};
+    // int points_y[] = {0, 0, -500, -500, 0, 0, -500, -500, 0, 0, -500, -500, 0, 0, -500, -500};
+    
+    const int N = 20;
+    
+    int points_x[N];
+    int points_y[N];
+    
+    void get_circle_points(float radius) {
+      float inc = 2 * M_PI / N;
+      for (int i = 0; i < N; i++) {
+        points_x[i] = round( radius * cos(inc * i) * ratio);
+        points_y[i] = round( radius * sin(inc * i));
+      }
+    }
+    
+    void get_star_points(float radius) {
+      int fake_points_x[N];
+      int fake_points_y[N];
+      float inc = 2 * M_PI / N;
+      for (int i = 0; i < N; i++) {
+        fake_points_x[i] = round( radius * cos(inc * i) * ratio);
+        fake_points_y[i] = round( radius * sin(inc * i));
+      }
+      int permutation[] = {0, 2, 4, 1, 3};
+    
+      for (int j = 0; j < N; j++) {
+        points_x[j] = fake_points_x[permutation[j]];
+        points_y[j] = fake_points_y[permutation[j]];
+      }
+    }
+    
+    void get_dy_dx() {
+      float diff_x = goal_pos[1] - cur_pos[1];
+      float diff_y = goal_pos[0] - cur_pos[0];
+      float r = sqrt(diff_x*diff_x + diff_y*diff_y);
+      next_vel[0] = diff_x / r;
+      next_vel[1] = diff_y / r;
+    }
+    
+    void set_goal(float x, float y) {
+      goal_pos[0] = x;
+      goal_pos[1] = y;
+    }
+    
+    float dist() {
+      return sqrt(pow(goal_pos[1] - cur_pos[1], 2.)+ pow(goal_pos[0] - cur_pos[0], 2.));
+    }
+    
+    int move_servos() {
+      if (abs(stepper1.distanceToGo()) <= 1) {
+        // Serial.printf("D2G 2 is : %d\n", stepper2.distanceToGo());
+    
+        if (abs(stepper2.distanceToGo()) <= 1) {
+          return 1;
+        }
+      }
+      stepper1.run();
+      stepper2.run();
+    
+      return 0;
+    }
+    
+    
+    void setup()
+    {  
+        stepper1.setMaxSpeed(1000.0);
+        stepper1.setAcceleration(200.0);
+        
+        stepper2.setMaxSpeed(1000.0);
+        stepper2.setAcceleration(200.0);
+        Serial.begin(115200);
+        get_circle_points(3048 / 2);
+    }
+    
+    int cur_point = 0;
+    int num_points = N;
+    int done = 0;
+     
+    void loop()
+    {
+      done = move_servos();
+    
+      if (done == 1) {
+        cur_point = (cur_point + 1) % num_points;
+        
+        Serial.print("Curr Point: ");
+        Serial.printf("%d\n", cur_point);
+    
+        done = 0;
+        goal_pos[0] = points_x[cur_point];
+        goal_pos[1] = points_y[cur_point];
+        stepper1.moveTo(goal_pos[0]);
+        stepper2.moveTo(goal_pos[1]);
+    
+        cur_pos[0] = stepper1.currentPosition();
+        cur_pos[1] = stepper2.currentPosition();
+        get_dy_dx();
+    
+        stepper1.setMaxSpeed(fabs(next_vel[1]) * speed);
+        stepper1.setAcceleration(fabs(next_vel[1]) * speed / 2);
+        
+        stepper2.setMaxSpeed(fabs(next_vel[0]) * speed);
+        stepper2.setAcceleration(fabs(next_vel[0]) * speed / 2.);
+      }
+    }
     </code>
 </div>
 <p>Fortunately, after much trial and error (and extreme thanks to Thomas) we were able to get our drawing machine to draw a circle and square. The code we used to execute this is below. We were not able to get the pen plotter to fully work, so our next steps would be to improve processing code for pen plotter and allow the drawing machine to move along the z-axis.
