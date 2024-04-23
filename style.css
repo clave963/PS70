@@ -129,8 +129,11 @@ code {
     overflow:auto;    
     padding:10px;
 }
-.codebox code {
-    /* Styles in here affect the text of the codebox */
-    font-size:0.9em;
-    /* You could also put all sorts of styling here, like different font, color, underline, etc. for the code. */
+.codebox {
+  border:1px solid black;
+  background-color:#EEEEFF;
+  white-space: pre-line;
+  padding:10px;
+  font-size:0.9em;
+  display: inline-block;
 }
