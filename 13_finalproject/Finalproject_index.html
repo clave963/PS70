@@ -23,32 +23,110 @@
 <div class="textcontainer">
 <p class="margin"></p>
 
-<h3>Final Project: Volumetric LED Sculpture </h3>
+<h3>Final Project: Strandbeest </h3>
 <p class="margin">
-
+  <div class="flexrow">
+    <a id="btn" href="./plotter_code.zip" download>Checkout the Code from this week!
+    </a>
+  </div>
+  <p class="margin">   </p>
+  <h4>Idea Generation and Inspiration </h4>
+  <p class="margin">   </p>
+  <p>
+    I decided to pivot my final project to the Strandbeest after I made a prototype during Kinetic Sculpture Week 03, using cardboard material and creating my own bespoke design based off of Dutch artist Theo Jansen's original proprietary kinetic sculpture design. My curiosity towards this project came from a place of interest in movement mechanics, specifically looking at robotic movement versus human movement. Additionally, I thought that doing this project was a nice integration of the various modules learned in class over this semester. I'm really happy that I went forward with this project. It was a massive learning curve for me across design and engineering technique, but I've come away with a tremendous amount of confidence in myself at building projects like this in the future. 
+  <br>
+  Below is a video of my Strandbeest. Following that, I'll walk through my design and fabrication process.  
+  <br>
 </p>
-
-<h4>Phase 1: Brainstorming</h4>
-
-Head over to [Week 1](./01_intro/Week1_index.html) for an intiial ideas on this project. 
-
-<p class="margin"></p>
-<p class="margin"></p>
-<br>
-
-<h4>Phase 2: Prototyping</h4>
-
-<p class="margin"></p>
-<p class="margin"></p>
-<br>
-
-<h4>Phase 3: Final Planning</h4>
-
-</div>
-</xmp>
-</body>
-
-<script src="../strapdown.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
-
-</html>
+   <!-- We specifically took inspiration from: <a href="https://ctian5136.github.io/ps70portfolio/html/weeks/finalproject.html"> Cindy </a> and pen plotter designs from <a href="https://andrewsleigh.github.io/plotter/"> Andrew Leigh. </a>  --> 
+    <p class="margin">   </p>
+    <div>
+      <div style="text-align:center;">
+        <iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/pfx2bN_xx8s?si=mfE_V3fa0ROxu48g" width="560"></iframe>
+        </div>
+  <br> 
+  <h4>Design Process</h4>
+  <p class="margin">   </p>
+  <p>
+    The design process for this Strandbeest took place in three phases:
+    <ol>
+      <li>Design prototype of an initial single leg. I wanted to nail the movement mechanics of one leg and then connect to two and make sure that it would fully operate with an attached DC motor. </li>
+      <li>Build the full body. For this, I built eight legs and the interconnecting pieces to hold the body together. </li>
+      <li>The third phase was to connect the body with hardware in order to allow the Strandbeest to walk. </li>
+    </ol>
+  </p> 
+  <p class="margin">   </p>
+  <p class="margin">   </p>
+  <p> <b> The following components were used in creating the Strandbeest: </b> </p>
+  <div>
+    <ul>
+  <li><p> PLA Filament</p></li>
+  <li><p>4 x M4 20mm Screws</p></li>  
+  <li><p>4 x M4 16 mm Screws </p></li>
+  <li><p>1 LiPo 3.7V Battery</p></li> 
+  <li><p>DC Motor</p></li>
+  <li><p>4 x M4 100mm thread peg</p></li>
+  <li><p>5V External Battery</p></li> 
+  <li><p>2 x SEEED Xiao ESP32</p></li>
+  <li><p>Motor driver</p></li> 
+  <li><p>Breadboard</p></li>
+  <li><p>Switch</p></li> 
+  <li><p>USB-C Cables</p></li>
+    </ul>
+  </div>
+  <div class="flexrow">
+    <img src="./org1.jpg" alt="org image" width=35%>
+    <img src="./org2.jpg" alt="org image" width=35%>
+    <img src="./org3.jpg" alt="org image" width=35%>
+  </div>
+  </p>
+  <p class="margin">   </p>
+  
+  <h4>Phase 1: Single Leg</h4>
+  <p class="margin">   </p>
+  <p>In the first phase of this project, I designed a single leg in order to correctly replicate the movement mechanics. This process included developing an original design in Fusion 360, (which greatly expanded my CAD skills) that would be 3D printed. This included how to use the joint function in order to connect the interlocking bones of one single leg.   
+  <br>
+  My first leg design was created with screws planned to connect the bones together. In order to do this, I extruded the components and used the joint function in Fusion to connect the interlocking bones of a single leg. I then made a test print to that and tested it out the next design I prototyped was a printing place method. This method worked, but after speaking with Nathan about print-in-place alternatives, I decided to design a second leg via this method.  
+  </p>  
+  <p class="margin">   </p>
+  <div class="flexrow">
+    <img src="./assembly1.jpg" alt="assembly image" width=35%>
+    <img src="./assembly2.jpg" alt="assembly image" width=35%>
+    <img src="./assembly3.jpg" alt="assembly image" width=35%>
+  </div>
+  </p>
+  <p class="margin">   </p>
+  <h4>Phase 2:Full Body</h4>
+  <p>
+    In wiring the two stepper motors for the drawing machine, we used an ESP32 to connect the motors to Arduino in order to control their movement. We wired the motors to two breadboards (one extender board) and then used the Stepper drivers to transform movement instructions from Arduino and intake voltage to power the motors. We need to be able to simultaneously control both stepper motors. In order to figure this out, we looked at Cindy's old board and referenced the pins to assemble our board. We also had to construct our own extra long wires because our board scale is so large. 
+  <br>
+  <br>
+    We ran into some issues getting one of our Stepper Motors to run. After running a current to the motor, we learned that one of our motors had an internal issue, which Bobby suggested could be due to some magnetization issues. 
+  <br>
+  <br>
+    We initially struggled to get power to work because we only had AC cords, which is why we used the adapter to convert the 5V power supply into the 12V we needed to power two motors from an external power supply.  </p> 
+  <p class="margin">   </p>
+  <h4>Phase 3: Hardware and Motor </h4>
+  <p class="margin">   </p>
+  <p> 
+    We developed some initial code to get the motors to individually move. Unfortunately, we weren't able to get the drawing machine responsive to this code after running into a number of bugs. Our next steps are to write and compile the Arduino code necessary for controlling the motors speed and direction, and second to develop the processing code necessary for Gcode use with the Pen plotter.  </p> 
+    <p>Fortunately, after much trial and error (and extreme thanks to Thomas) we were able to get our drawing machine to draw a circle and square. The code we used to execute this is included in our files for the week. We were not able to get the pen plotter to fully work, so our next steps would be to improve processing code for pen plotter and allow the drawing machine to move along the z-axis.
+    </p>
+  <p class="margin">   </p>
+  <h4>Next Steps: Failure & Learnings </h4>
+  <p class="margin">   </p>
+  <p>Below is a brief video of our first prototype of the Drawing Machine. Drawing with UV ink! We placed a UV flashlight next to the paper to show the ink appearing. We were happily surprised to get a prototype working and intend to follow-up on the next steps of improving the pen plotter devie in time for Demo day in May :) </p>
+  <div>
+  
+    <div style="text-align:center;">
+      <iframe allowfullscreen="" frameborder="0" height="315" src="https://www.youtube.com/embed/KavDKJPyeYI?si=HcRGndqawHrjs7Xg" width="560"></iframe>
+      </div>
+  </div>
+  </div></xmp>
+  </body>
+  </body>
+  
+  <script src="../strapdown.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
+  
+  </html>
