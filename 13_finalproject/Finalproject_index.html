@@ -105,19 +105,27 @@
   <p class="margin">   </p>
   <h4>Phase 2:Full Body</h4>
   <p>
-    tbw
-  <br>
-  <br>
-    tbw
-  <br>
-  <br>
-   tbw  </p> 
+    The second phase of the project involved creating the full body of the Strandbeest. I needed to print an additional seven legs and design interlocking body parts to connect them. While the waiting for the 3D prints, I got to designing how all the legs interconnect. Upon talking with Nathan, I decided to use threaded screws of about 90 to 100 millimeters in length. These pegs would screw into all of the interconnecting joints that interlock the body of the Strandbeest. I added spaces to connect the body pegs together and create additional length. I tested this out some and it worked effectively the final phase was to connect the motor and hardware to power the strong piece.  
+  </p> 
+  <p class="margin">   </p>
+  <iframe src="https://mygsd130.autodesk360.com/shares/public/SH512d4QTec90decfa6ecd95a5203b5d4023?mode=embed" width="640" height="480" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"  frameborder="0"></iframe>
   <p class="margin">   </p>
   <h4>Phase 3: Hardware and Motor </h4>
   <p class="margin">   </p>
   <p> 
-   tbw </p> 
-    <p>tbw
+    The final phase of the Strandbeest creation involved all hardware development. The hardware consisted of a DC Motor, a SEEED Xiao ESP32, a motor driver that transforms inputs from the Xiao to control the speed and execution of the motor, and an external 5V battery. I created a small motor box with small compartments to hold the motor, Xiao  and motor driver which you can see this below.  </p> 
+    <p>
+    I connected the Xiao ESP 32 to the motor and tested two different battery voltages to determine the correct battery voltage. First, I tried a 3.3V LiPo battery, this voltage would intermittently power the Strandbeest. Rather, a 5 Volt battery would consistently work each time to power the Strandbeest. 
+    </p>
+    <p class="margin">   </p>
+    <div class="flexrow">
+      <img src="./Strandbeest_01.jpg" alt="org image" width=35%>
+      <img src="./Stranbeest_02.jpg" alt="org image" width=35%>
+      <img src="./Stranbeest_03.jpg" alt="org image" width=35%>
+    </div>
+    <p class="margin">   </p>
+    <p>
+      Additionally, I wanted to have a external remote to power the Strandbeest on and off. In order to do this, I used a second Xiao ESP32 to send inputs across a sensor to the receiving Xiao in the motorbox. The sender Xiao includes a small on off switch, and had initially included a potentiometer to control the speed of the motor. However, I had some trouble connecting the potentiometer to the XiaoESP 32 (it was specifically running into issues with AnalogWrite in Arduino). So for this demo, I removed the potentiometer. I developed a small rudimentary stand to put the body of the Strandbeest a few centimeters above ground in order to enable the legs to move freely. So we can see the freedom of motion successfuly execute. Unfortunately, the Strandbeest was not able to walk by itself without falling over. I was quite bummed that it was unable to walk after so much effort, but the next period of phase of development will be focused on troubleshooting these mechanical issues
     </p>
   <p class="margin">   </p>
   <h4>Next Steps: Failure & Learnings </h4>
