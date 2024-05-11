@@ -137,3 +137,4 @@ code {
   font-size:0.9em;
   display: inline-block;
 }
+ul, li { margin: 0; padding: 0; }
